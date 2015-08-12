@@ -42,7 +42,9 @@ class latexTableExporter(exporter):
         
     def __unicode__(self):
         return self.tableString
-            
+
+    def get_string(self):
+        return self.tableString
  
 if __name__ == "__main__":
     t = PrettyTable(['a','b','c'])

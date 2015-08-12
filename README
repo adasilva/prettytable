@@ -474,6 +474,18 @@ will print:
     ...
 </table>
 
+== LaTeX tables ==
+
+You can use the `tableExporters` module to get a LaTeX table. 
+
+print tableExporters.latexTableExporter(x)
+
+will print a LaTeX table. The class can also take optional keyword arguments `caption` and `label`, which will be inserted into the LaTeX caption and label table attributes.
+
+y = tableExporters.latexTableExporter(x).get_string()
+
+returns the LaTeX code as a string.
+
 = Miscellaneous things =
 
 == Copying a table ==
