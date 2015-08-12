@@ -476,15 +476,16 @@ will print:
 
 == LaTeX tables ==
 
-You can use the `tableExporters` module to get a LaTeX table. 
+You can use the `tableFormats` module to get a LaTeX-formatted string implementation of the table. 
 
-print tableExporters.latexTableExporter(x)
+print tableFormats.latexTable(x)
 
 will print a LaTeX table. The class can also take optional keyword arguments `caption` and `label`, which will be inserted into the LaTeX caption and label table attributes.
 
-y = tableExporters.latexTableExporter(x).get_string()
+xt = tableFormats.latexTable(x)
+print xt.get_string()
 
-returns the LaTeX code as a string.
+gives the same result, and can be assigned to a variable.
 
 = Miscellaneous things =
 

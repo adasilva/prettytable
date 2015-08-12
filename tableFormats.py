@@ -1,7 +1,23 @@
 from prettytable import PrettyTable
+import abc
+
+class TableString(object):
+    """Metaclass for formatted table strings."""
+    __metaclass__ = abc.ABCMeta
+
+    @abc.abstractmethod    
+    def __unicode__(self): return
+
+    @abc.abstractmethod    
+    def __str__(self): return
+    
+    @abc.abstractmethod
+    def get_string(self,outfile,**kwargs):
+        '''return the string'''
+        return
 
 
-class latexTableExporter(exporter):
+class latexTable(TableString):
     """Construct and export a LaTeX table from a PrettyTable.
 
     latexTableExporter(table,**kwargs)
@@ -49,5 +65,9 @@ class latexTableExporter(exporter):
 if __name__ == "__main__":
     t = PrettyTable(['a','b','c'])
     t.add_row([1,2,3])
-    print latexTableExporter(t)
-    
+    xt = latexTable(t,caption='Testing formatted table string',label='tab:test')
+    print '\n'
+    print xt
+    print '\n'
+    print xt.get_string()
+    print '\n'
