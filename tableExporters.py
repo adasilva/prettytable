@@ -1,18 +1,4 @@
 from prettytable import PrettyTable
-import abc
-
-
-class exporter(object):
-    """Metaclass for table exporters."""
-    __metaclass__ = abc.ABCMeta
-    
-    @abc.abstractmethod
-    def export(self,outfile,**kwargs):
-        '''Export data to a file'''
-        return
-
-    @abc.abstractmethod    
-    def __unicode__(self): return
 
 
 class latexTableExporter(exporter):
@@ -56,10 +42,10 @@ class latexTableExporter(exporter):
         
     def __unicode__(self):
         return self.tableString
-    
-    def export(self,filename):
-        with open(filename,'w') as f:
-            f.write(self.tableString)
-        return None
-        
+            
  
+if __name__ == "__main__":
+    t = PrettyTable(['a','b','c'])
+    t.add_row([1,2,3])
+    print latexTableExporter(t)
+    
