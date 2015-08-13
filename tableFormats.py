@@ -74,7 +74,9 @@ if __name__ == "__main__":
     print xt
     print '\n2. Use get_string method:\n'
     print xt.get_string()
-    print '\n3. Format floats to two decimal points:\n'
+    print '\n3. Format floats to two decimal points: (KNOWN ISSUE)\n'
+    print xt.get_string(float_format='0.2')
+    print '\n4. Workaround to format floats:\n'
     t.float_format = '0.2'
     xt2 = latexTable(t,caption='Floats are formatted to have two decimal places',label='tab:test2')
     print xt2
