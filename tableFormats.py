@@ -35,11 +35,11 @@ class latexTable(TableString):
         self.table = table
 
         # Construct LaTeX string from table
-        s = r'\begin{tabular}' + '\n'
+        s = r'\begin{table}' + '\n'
         s = s + r'\centering' + '\n'
         s = s + r'\caption{%s}\label{%s}' %(caption,label)
         s = s + '\n'
-        s = s + r'\begin{table}{'
+        s = s + r'\begin{tabular}{'
         s = s + ''.join(['c',]*len(self.table.field_names)) + '}'
         s = s + '\n'
         s = s + '&'.join(self.table.field_names)+'\\ \hline'+'\n'
@@ -50,7 +50,7 @@ class latexTable(TableString):
                 s = s + '\\'
             s = s + '\n'
             
-        s = s + r'\end{table}\end{\tabular}'
+        s = s + r'\end{tabular}\end{\table}'
         self.tableString = s
 
     def __str__(self):
