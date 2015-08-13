@@ -33,41 +33,48 @@ class latexTable(TableString):
     """
     def __init__(self,table,caption='',label=''):
         self.table = table
+        self.caption = caption
+        self.label = label
 
-        # Construct LaTeX string from table
+    def __str__(self):
+        return self.get_string()
+        
+    def __unicode__(self):
+        return self.get_string()
+
+    def get_string(self):
+        ''' Construct LaTeX string from table'''
+        options = self.table._get_options({}) #should allow kwargs here
         s = r'\begin{table}' + '\n'
         s = s + r'\centering' + '\n'
-        s = s + r'\caption{%s}\label{%s}' %(caption,label)
+        s = s + r'\caption{%s}\label{%s}' %(self.caption,self.label)
         s = s + '\n'
         s = s + r'\begin{tabular}{'
         s = s + ''.join(['c',]*len(self.table.field_names)) + '}'
         s = s + '\n'
-        s = s + '&'.join(self.table.field_names)+'\\ \hline'+'\n'
-        for i in range(len(self.table._rows)):
-            row = [str(itm) for itm in self.table._rows[i]]
+        s = s + '&'.join(self.table.field_names)+r'\\ \hline'+'\n'
+        rows = self.table._format_rows(self.table._rows,options)
+        #print rows
+        for i in range(len(rows)):
+            row = [str(itm) for itm in rows[i]]
             s = s + '&'.join(row)
             if i != len(self.table._rows)-1:
-                s = s + '\\'
+                s = s + r'\\'
             s = s + '\n'
             
         s = s + r'\end{tabular}\end{\table}'
-        self.tableString = s
-
-    def __str__(self):
-        return self.tableString
+        return s
         
-    def __unicode__(self):
-        return self.tableString
-
-    def get_string(self):
-        return self.tableString
  
 if __name__ == "__main__":
     t = PrettyTable(['a','b','c'])
-    t.add_row([1,2,3])
+    t.add_row([1,2.0,3.14159])
     xt = latexTable(t,caption='Testing formatted table string',label='tab:test')
-    print '\n'
+    print '1. Simply print the table:\n'
     print xt
-    print '\n'
+    print '\n2. Use get_string method:\n'
     print xt.get_string()
-    print '\n'
+    print '\n3. Formatted to two decimal points:\n'
+    t.float_format = '0.2'
+    xt2 = latexTable(t,caption='Floats are formatted to have two decimal places',label='tab:test2')
+    print xt2
