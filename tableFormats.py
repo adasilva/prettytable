@@ -42,9 +42,9 @@ class latexTable(TableString):
     def __unicode__(self):
         return self.get_string()
 
-    def get_string(self):
+    def get_string(self,**kwargs):
         ''' Construct LaTeX string from table'''
-        options = self.table._get_options({}) #should allow kwargs here
+        options = self.table._get_options(kwargs) #does not work bc of prettytable bug
         s = r'\begin{table}' + '\n'
         s = s + r'\centering' + '\n'
         s = s + r'\caption{%s}\label{%s}' %(self.caption,self.label)
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     print xt
     print '\n2. Use get_string method:\n'
     print xt.get_string()
-    print '\n3. Formatted to two decimal points:\n'
+    print '\n3. Format floats to two decimal points:\n'
     t.float_format = '0.2'
     xt2 = latexTable(t,caption='Floats are formatted to have two decimal places',label='tab:test2')
     print xt2
