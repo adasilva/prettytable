@@ -62,7 +62,8 @@ class latexTable(TableString):
                 s = s + r'\\'
             s = s + '\n'
             
-        s = s + r'\end{tabular}\end{\table}'
+        s = s + r'\end{tabular}' + '\n'
+        s = s + r'\end{table}'
         return s
         
  
